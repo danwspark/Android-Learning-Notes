@@ -1,0 +1,3 @@
+It's starting. Some weird rendering issues at first, but got resolved through stackoverflow.
+
+Want to learn how to emacs better now.. lol maybe also learn sublime

@@ -1,0 +1,86 @@
+To make the settings button display a <message>
+
+-under public boolean onOptionsItemSelected(MenuItem item)
+-under if (id == R.id.action_settings)
+-add the lines
+	if (id == R.id.action_settings){
+		Toast toastMessage = Toast.makeText (this, "<message>", Toast.LENGTH_LONG);
+		toastMessage.show();
+		return true;
+	}
+
+
+xml files store layout.
+every item on screen is called a view. they all have different id's
+
+Java code file: MainActivity:
+to make this do something, must associate frames in the code.
+
+Example:
+public class MainActivity extends AppCompatActivity{
+
+	private Button <buttonName>;/// variable created////
+	private TextView <messageName>;/// variable created///
+
+	@Override
+	protected void onCreate (Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+
+		<buttonName> = (Button) findViewById(R.id.<buttonID>); 
+			//sets button variable defined above with the appropriate ID///
+			//must be done after setContentView()///
+			//the (Button) is basically casting the findView return as a button type that will correspond with variable <buttonName>///
+		<messageName> = (TextView) findViewById(R.id.<textViewID>);
+
+		View.OnClickListener <OCL name> = new View.OnClickListener{
+			@Override
+			public void onClick(View v){
+				<messageName>.setText("<Message to change on click>");
+			}
+		};
+			///make OnClickListener class called <OCL Name>. its action is to
+			///set the text on the messageName
+		<buttonName>.setOnClickListener(<OCL name>);
+			///This sets the button made earlier a clickerListener
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ...
+        ...
+        ...
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            Toast toastMessage = Toast.makeText(this, "The settings option got tapped. Hello Mom, Hello Dad", Toast.LENGTH_LONG);
+            toastMessage.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+}
